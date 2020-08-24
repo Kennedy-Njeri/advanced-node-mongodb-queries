@@ -3,17 +3,5 @@
 # dependencies
 node_modules
 
-# testing
-coverage
-
-# production
-build
-
-
 config/dev.env
 
-
-# misc
-.DS_Store
-.env
-npm-debug.log
