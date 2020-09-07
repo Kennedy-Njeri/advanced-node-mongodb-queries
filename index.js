@@ -1,5 +1,6 @@
 const express = require('express')
 require('./db/mongoose')
+const colors = require('colors')
 const bootcampRouter = require('./routes/bootcamps')
 
 
@@ -15,5 +16,5 @@ app.use(bootcampRouter)
 
 
 app.listen(port, () => {
-    console.log('Server is up on port ' + port)
+    console.log(`Server is up on port ${port}`.blue.bold)
 })
