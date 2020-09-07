@@ -14,8 +14,15 @@ router.post('/api/v1/bootcamps', async (req, res) => {
 
 })
 
-router.post('/api/v1/bootcamps', (req, res) => {
-    res.status(200).json({ success: true, msg: 'Show all bootcamps'})
+router.get('/api/v1/bootcamps', async (req, res) => {
+
+    try {
+        const bootcamps = await Bootcamp.find()
+        res.status(200).json({ success: true, data: bootcamps })
+    } catch (e) {
+        res.status(500).json({ success: false })
+    }
+
 })
 
 
