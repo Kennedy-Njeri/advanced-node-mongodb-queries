@@ -54,13 +54,46 @@ router.get('/api/v1/bootcamps/:id', async (req, res) => {
 })
 
 
-router.put('/api/v1/bootcamps/:id', (req, res) => {
-    res.status(200).json({ success: true, msg: `Update bootcamp ${req.params.id}`})
+router.put('/api/v1/bootcamps/:id', async (req, res) => {
+
+    try {
+        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        })
+
+        if (!bootcamp) {
+            return res.status(400).json({ success: false })
+        }
+
+        res.status(200).json({ success: true, data: bootcamp })
+
+    } catch (e) {
+        res.status(400).json({ success: false })
+    }
+
+    
 })
 
 
-router.delete('/api/v1/bootcamps/:id', (req, res) => {
-    res.status(200).json({ success: true, msg: `Delete bootcamp ${req.params.id}`})
+router.delete('/api/v1/bootcamps/:id', async (req, res) => {
+
+    try {
+
+        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id)
+
+        if (!bootcamp) {
+            return res.status(400).json({ success: false })
+        }
+
+        res.status(200).json({ success: true, data: bootcamp })
+
+    } catch (e) {
+
+        res.status(400).json({ success: false })
+
+    }
+
 })
 
 
